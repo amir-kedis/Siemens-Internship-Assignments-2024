@@ -4,7 +4,7 @@ Solutions for the Siemens Summer Internship 2024 assignments:
 server-client configuration and packet validation tasks.
 
 > [!NOTE]
-> This repo contains the solutions for both assignment for ease of access.
+> This repo contains the solutions for both assignments for ease of access.
 
 ## Folders
 
