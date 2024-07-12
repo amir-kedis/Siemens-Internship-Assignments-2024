@@ -1,3 +1,19 @@
+/*============================================================================
+ *
+ *
+ *    ██╗   ██╗   ██╗ ████████╗███████╗███████╗████████╗███████╗
+ *    ██║   ██║   ╚██╗╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝
+ *    ██║   ██║    ╚██╗  ██║   █████╗  ███████╗   ██║   ███████╗
+ *    ██║   ██║    ██╔╝  ██║   ██╔══╝  ╚════██║   ██║   ╚════██║
+ *    ╚██████╔╝██╗██╔╝   ██║   ███████╗███████║   ██║   ███████║
+ *     ╚═════╝ ╚═╝╚═╝    ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝
+ *
+ *
+ *     This Module tests the packet_tester with all possible scenarios.
+ *
+ *
+ *=============================================================================*/
+
 #include "../src/packet_tester.hpp"
 #include "gtest/gtest.h"
 
@@ -75,8 +91,7 @@ TEST(PacketValidatorTest, monotonicIncrease) {
 
   // Assert
   vector<string> expected = {"Yes", "Yes", "Yes", "Yes", "Yes"};
-  ASSERT_EQ(results, expected)
-      << "monotonic increase";
+  ASSERT_EQ(results, expected) << "monotonic increase";
 }
 
 TEST(PacketValidatorTest, monotonicIncreaseExceedingModules) {
@@ -91,8 +106,7 @@ TEST(PacketValidatorTest, monotonicIncreaseExceedingModules) {
 
   // Assert
   vector<string> expected = {"Yes", "Yes", "Yes", "Yes", "No"};
-  ASSERT_EQ(results, expected)
-      << "monotonic increase exceeding num of modules";
+  ASSERT_EQ(results, expected) << "monotonic increase exceeding num of modules";
 }
 
 TEST(PacketValidatorTest, monotonicDecrease) {
@@ -118,7 +132,7 @@ TEST(PacketValidatorTest, NegativeNumbers) {
 
   // Act
   vector<string> results;
-  
+
   // Assert
   ASSERT_ANY_THROW(pt.validatePackets(packets, results));
 }
@@ -131,7 +145,7 @@ TEST(PacketValidatorTest, MixedPostiveNegative) {
 
   // Act
   vector<string> results;
-  
+
   // Assert
   ASSERT_ANY_THROW(pt.validatePackets(packets, results));
 }
