@@ -1,4 +1,4 @@
-TestCase ID,Master Option For BufferData,Master Option For Timeout,Client Option For BufferData,Client Option For Timeout,Valid TC,Expected BufferData,Expected Timeout
+TestCase ID,Master Option For BufferData,Master Option For TimeOut,Client Option For BufferData,Client Option For TimeOut,Valid TC,Expected BufferData,Expected TimeOut
 1,True,True,True,True,YES,True,True
 2,True,True,True,False,NO,NA,NA
 3,True,True,True,NA,YES,True,True

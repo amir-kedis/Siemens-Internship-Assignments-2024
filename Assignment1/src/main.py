@@ -2,6 +2,7 @@
 
 import itertools
 import csv
+import re
 
 from client import Client
 from server import Server
@@ -9,7 +10,7 @@ from server import Server
 
 def generate_test_cases(options):
     """
-    Generate the testcases for given set of options and gets you the expected value and if it's valid or not.
+    Generate testcases for given set of options with expected values.
 
     Args:
         options (list): list of strings of options
@@ -57,6 +58,14 @@ def generate_test_cases(options):
 
 
 def save_testacses_to_csv(testcases, options, filename):
+    """
+    Write the testcases to output csv file.
+
+    Args:
+        testcases (list): the testcases that needs to be written
+        options (list): server options
+        filename (str): the name of the files to write the testcases to
+    """
     with open(filename, 'w') as csvfile:
         fieldnames = ["TestCase ID"]
         fieldnames += [f"Master Option For {opt}" for opt in options]
@@ -83,9 +92,46 @@ def save_testacses_to_csv(testcases, options, filename):
         writer.writerows(rows)
 
 
+def contains_special_characters(str):
+    """
+    Check if a string has a special character in it.
+
+    Returns:
+        True if it has a special character.
+    """
+    return bool(re.search(r'[^a-zA-Z0-9\s]', str))
+
+
+def read_input_options(filename):
+    """
+    Read the input options of the server from a file and validate it.
+
+    Args:
+        filename (str): name of the input file.
+
+    Returns:
+        list of options or none if there exist an invalid input.
+    """
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+    options = [line.strip() for line in lines]
+
+    if len(options) < 2:
+        return None
+    if len(options) != len(set(options)):
+        return None
+    for option in options:
+        if contains_special_characters(option):
+            return None
+
+    return options
+
+
 if __name__ == "__main__":
-    options = ["BufferData", "Timeout"]
+    options = read_input_options("input.txt")
 
-    testcases = generate_test_cases(options)
-
-    save_testacses_to_csv(testcases, options, "output.csv")
+    if options is None:
+        print("Please check the input")
+    else:
+        testcases = generate_test_cases(options)
+        save_testacses_to_csv(testcases, options, "output.csv")
