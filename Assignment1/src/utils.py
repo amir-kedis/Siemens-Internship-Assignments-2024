@@ -85,7 +85,7 @@ def read_input_options(filename):
 
     try:
         validate_input_options(options)
-    except:
+    except ValueError:
         options = None
 
     return options

@@ -1,7 +1,6 @@
 import unittest
 
 from src.utils import validate_input_options
-from src.server import Server
 
 
 class TestValidateInputOptions(unittest.TestCase):

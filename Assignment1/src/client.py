@@ -48,5 +48,7 @@ class Client:
             #       True,   True,   True,   True     => Valid
             for option, value in config_options.items():
                 if value is not None and value != self.server.get_options()[option]:
+                    self.server.configure(
+                        {option: None for option in config_options.keys()})
                     return "Error: Cannot change {0}".format(option)
         return "Server configured successfully"
