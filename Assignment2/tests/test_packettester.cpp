@@ -110,6 +110,32 @@ TEST(PacketValidatorTest, monotonicDecrease) {
   ASSERT_EQ(results, expected) << "monotonic decrease";
 }
 
+TEST(PacketValidatorTest, NegativeNumbers) {
+  // Arrange
+  int num_modules = 4;
+  vector<int> packets = {-5, -4, -3, -2, -1};
+  PacketTester pt(num_modules);
+
+  // Act
+  vector<string> results;
+  
+  // Assert
+  ASSERT_ANY_THROW(pt.validatePackets(packets, results));
+}
+
+TEST(PacketValidatorTest, MixedPostiveNegative) {
+  // Arrange
+  int num_modules = 4;
+  vector<int> packets = {-5, 4, 3, -2, -1};
+  PacketTester pt(num_modules);
+
+  // Act
+  vector<string> results;
+  
+  // Assert
+  ASSERT_ANY_THROW(pt.validatePackets(packets, results));
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

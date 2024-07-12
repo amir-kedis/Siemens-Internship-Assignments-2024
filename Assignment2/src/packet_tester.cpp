@@ -3,6 +3,8 @@
 PacketTester::PacketTester(int num_modules) : num_modules(num_modules) {}
 
 bool PacketTester::isValidPacket(int current_module, int next_module) {
+  if (current_module < 0 || next_module < 0)
+    throw "Value Error";
   if (current_module == num_modules)
     return (next_module == num_modules || next_module == 1);
   else
