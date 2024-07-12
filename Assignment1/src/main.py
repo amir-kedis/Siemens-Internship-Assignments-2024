@@ -151,6 +151,12 @@ def main(input_filename, output_filename):
 
 
 def run_tests():
+    """
+    Run the main program against custom already made testcases.
+
+    Testcases are located in tests/inputs directory and output files
+    are stored in the tests/output directory.
+    """
     init()
 
     print(Fore.GREEN)
