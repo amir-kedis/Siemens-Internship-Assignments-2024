@@ -2,7 +2,7 @@
 
 > [!important]
 > This readme contains only instructions of how to run and test the assignment.
-> for more about this assigment and my approach to it please check the
+> for more about this assignment and my approach to it please check the
 > [Report here](./docs/report.md).
 
 ## Setup Instructions
