@@ -1,6 +1,7 @@
 """Tests server, client components for a certain set of options."""
 
 import itertools
+import csv
 
 from client import Client
 from server import Server
@@ -55,18 +56,36 @@ def generate_test_cases(options):
     return testcases
 
 
+def save_testacses_to_csv(testcases, options, filename):
+    with open(filename, 'w') as csvfile:
+        fieldnames = ["TestCase ID"]
+        fieldnames += [f"Master Option For {opt}" for opt in options]
+        fieldnames += [f"Client Option For {opt}" for opt in options]
+        fieldnames += ["Valid TC"]
+        fieldnames += [f"Expected {opt}" for opt in options]
+
+        writer = csv.writer(csvfile)
+
+        writer.writerow(fieldnames)
+
+        rows = []
+
+        for testcase in testcases:
+            row = [testcase[0]]
+            row += testcase[1].values()
+            row += testcase[2].values()
+            row.append(testcase[3])
+            row += testcase[4].values()
+
+            row = ["NA" if x is None else x for x in row]
+            rows.append(row)
+
+        writer.writerows(rows)
+
+
 if __name__ == "__main__":
     options = ["BufferData", "Timeout"]
+
     testcases = generate_test_cases(options)
 
-    for testcase in testcases:
-        print(testcase)
-
-    # server = Server(options)
-    # master_client = Client(server, is_master=True)
-    # slave_client = Client(server)
-    # print(server.get_options())
-    # for i in testcases:
-    #     print(i)
-    # print(len(testcases))
-    # print(server.get_options())
+    save_testacses_to_csv(testcases, options, "output.csv")
