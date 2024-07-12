@@ -107,6 +107,26 @@ def contains_special_characters(str):
     return bool(re.search(r'[^a-zA-Z0-9\s]', str))
 
 
+def validate_input_options(options):
+    """
+    Validate the input options.
+
+    Args:
+        options (list): list of options as strings
+
+    Raises:
+        IOError
+        ValueError
+    """
+    if len(options) < 2:
+        raise IOError("Options must be more than 1")
+    if len(options) != len(set(options)):
+        raise ValueError("Options must be unique")
+    for option in options:
+        if contains_special_characters(option):
+            raise ValueError("Options must not include special character")
+
+
 def read_input_options(filename):
     """
     Read the input options of the server from a file and validate it.
@@ -121,13 +141,10 @@ def read_input_options(filename):
         lines = file.readlines()
     options = [line.strip() for line in lines]
 
-    if len(options) < 2:
-        return None
-    if len(options) != len(set(options)):
-        return None
-    for option in options:
-        if contains_special_characters(option):
-            return None
+    try:
+        validate_input_options(options)
+    except:
+        options = None
 
     return options
 
@@ -160,9 +177,9 @@ def run_tests():
     init()
 
     print(Fore.GREEN)
-    print("===================================================================")
-    print("            RUNNING the program with different inputs      ")
-    print("===================================================================")
+    print("==================================================================")
+    print("            RUNNING the program with different inputs             ")
+    print("==================================================================")
 
     input_files = os.listdir("./src/tests/inputs")
 
