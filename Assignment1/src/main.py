@@ -2,7 +2,12 @@
 
 import itertools
 import csv
+import os
 import re
+import sys
+
+
+from colorama import Fore, init
 
 from client import Client
 from server import Server
@@ -127,11 +132,46 @@ def read_input_options(filename):
     return options
 
 
-if __name__ == "__main__":
-    options = read_input_options("input.txt")
+def main(input_filename, output_filename):
+    """
+    Run the testcase generator for a certain input.
+
+    Args:
+        input_filename (str): input file name
+        output_filename (str): output file name
+    """
+    options = read_input_options(input_filename)
 
     if options is None:
-        print("Please check the input")
+        print("Invalid Input.")
     else:
         testcases = generate_test_cases(options)
-        save_testacses_to_csv(testcases, options, "output.csv")
+        save_testacses_to_csv(testcases, options, output_filename)
+        print("output file created successfully")
+
+
+def run_tests():
+    init()
+
+    print(Fore.GREEN)
+    print("===================================================================")
+    print("            RUNNING the program with different inputs      ")
+    print("===================================================================")
+
+    input_files = os.listdir("./src/tests/inputs")
+
+    for input_file in input_files:
+        print(Fore.MAGENTA)
+        print("Running " + input_file)
+
+        print(Fore.GREEN, end="")
+        output_file = os.path.splitext(input_file)[0] + "_out.csv"
+        main("./src/tests/inputs/" + input_file,
+             "./src/tests/outputs/" + output_file)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "test":
+        run_tests()
+    else:
+        main("input.txt", "output.csv")
