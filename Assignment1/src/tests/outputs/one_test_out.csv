@@ -1,0 +1,10 @@
+TestCase ID,Master Option For BufferData,Client Option For BufferData,Valid TC,Expected BufferData
+1,True,True,YES,True
+2,True,False,NO,NA
+3,True,NA,YES,True
+4,False,True,NO,NA
+5,False,False,YES,False
+6,False,NA,YES,False
+7,NA,True,YES,True
+8,NA,False,NO,NA
+9,NA,NA,YES,True

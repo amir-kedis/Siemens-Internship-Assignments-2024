@@ -59,8 +59,8 @@ def validate_input_options(options):
     Raises:
         ValueError
     """
-    if len(options) < 2:
-        raise ValueError("Options must be more than 1")
+    if len(options) < 1:
+        raise ValueError("Options must be more than 0")
     if len(options) != len(set(options)):
         raise ValueError("Options must be unique")
     for option in options:
