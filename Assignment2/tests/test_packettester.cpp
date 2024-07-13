@@ -150,6 +150,33 @@ TEST(PacketValidatorTest, MixedPostiveNegative) {
   ASSERT_ANY_THROW(pt.validatePackets(packets, results));
 }
 
+TEST(PacketValidatorTest, AllZeros) {
+  // Arrange
+  int num_modules = 4;
+  vector<int> packets = {0, 0 , 0, 0, 0};
+  PacketTester pt(num_modules);
+
+  // Act
+  vector<string> results;
+
+  // Assert
+  ASSERT_ANY_THROW(pt.validatePackets(packets, results));
+}
+
+TEST(PacketValidatorTest, NoPackets) {
+  // Arrange
+  int num_modules = 4;
+  vector<int> packets = {};
+  PacketTester pt(num_modules);
+
+  // Act
+  vector<string> results;
+
+  // Assert
+  ASSERT_ANY_THROW(pt.validatePackets(packets, results));
+}
+
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
